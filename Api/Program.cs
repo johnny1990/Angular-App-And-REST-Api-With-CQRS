@@ -43,8 +43,16 @@ namespace Api
             builder.Services.AddDbContext<OMDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular",
+                    policy => policy
+                        .WithOrigins("http://localhost:63175") // Angular dev server
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
 
-           
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -58,6 +66,7 @@ namespace Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAngular");
 
             app.UseAuthorization();
             app.UseResponseCompression();

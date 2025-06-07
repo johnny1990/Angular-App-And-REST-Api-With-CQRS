@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h2>Create Order</h2>
+
+  <div *ngIf="message" class="alert alert-info">{{ message }}</div>
+
+  <form (ngSubmit)="submitOrder()">
+    <div class="mb-3">
+      <label for="customerName" class="form-label">Customer Name</label>
+      <input type="text" id="customerName" [(ngModel)]="order.customerName" name="customerName" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="productName" class="form-label">Product</label>
+      <input type="text" id="productName" [(ngModel)]="order.productName" name="productName" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" id="quantity" [(ngModel)]="order.quantity" name="quantity" class="form-control" min="1" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="orderDate" class="form-label">Order Date</label>
+      <input type="date" id="orderDate" [(ngModel)]="order.orderDate" name="orderDate" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

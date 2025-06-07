@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h2>Top Selling Products (Last 30 Days)</h2>
+
+  <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
+
+  <table *ngIf="reportData.length" class="table table-bordered table-striped mt-3">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Total Units Sold</th>
+        <th>Total Revenue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of reportData">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.unitsSold }}</td>
+        <td>{{ product.totalRevenue | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!reportData.length && !message">No data available for the last 30 days.</div>
+</div>

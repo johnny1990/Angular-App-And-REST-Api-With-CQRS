@@ -1,4 +1,5 @@
 ﻿using Application.Commands;
+using Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,14 @@ namespace Api.Controllers
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id) => Ok(id);
+
+        [HttpGet("get-all-orders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var result = await _mediator.Send(new GetAllOrdersQuery());
+            return Ok(result);
+        }
+
 
         [HttpPost("add-order")]
         public async Task<IActionResult> AddOrder([FromBody] CreateOrderCommand command)

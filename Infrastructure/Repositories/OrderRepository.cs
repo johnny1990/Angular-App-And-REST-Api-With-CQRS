@@ -1,6 +1,7 @@
 ﻿using Domain.Context;
 using Domain.Entities;
 using Infrastructure.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -12,6 +13,13 @@ namespace Infrastructure.Repositories
         public OrderRepository(OMDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<List<Order>> GetAllOrders()
+        {
+            return await _context.Orders
+                    .Take(1000) // Limit to 100 orders for performance
+                .ToListAsync();
         }
 
         public async Task<int> CreateOrder(Order order, List<OrderProduct> products)

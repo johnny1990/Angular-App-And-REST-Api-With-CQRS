@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Product List</h2>
+  <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
+
+  <table class="table table-striped" *ngIf="products.length">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <!-- <th>Stock</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <!-- <td>{{ product.stock }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!products.length && !message">No products available.</div>
+</div>
