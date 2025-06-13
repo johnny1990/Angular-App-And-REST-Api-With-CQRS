@@ -1,25 +1,22 @@
-<div class="container mt-4">
-  <h2>Product List</h2>
-  <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
 
-  <table class="table table-striped" *ngIf="products.length">
+
+<div class="container mt-3">
+  <h3>Product List</h3>
+  <button class="btn btn-primary mb-2" routerLink="/products/add">Add Product</button>
+  <table class="table table-bordered table-striped">
     <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <!-- <th>Stock</th> -->
-      </tr>
+      <tr><th>ID</th><th>Name</th><th>Price</th><th>Actions</th></tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.id }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.price }}</td>
-        <!-- <td>{{ product.stock }}</td> -->
+      <tr *ngFor="let p of products">
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.price | currency }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="editProduct(p.id)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
-
-  <div *ngIf="!products.length && !message">No products available.</div>
 </div>
