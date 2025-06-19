@@ -46,7 +46,7 @@ namespace Api.Controllers
             {
                 if (id <= 0)
                     return BadRequest("Invalid product ID.");
-                var result = await _mediator.Send(new GetProductByIdQuery { Id = id });
+                var result = await _mediator.Send(new GetProductByIdQuery(id)); // Pass 'id' to the constructor
                 if (result == null)
                 {
                     return NotFound();
