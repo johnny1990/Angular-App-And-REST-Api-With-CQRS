@@ -1,23 +1,32 @@
 <div class="container mt-4">
-  <h2>Top 1000 Spending Users</h2>
-  <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
+  <h2 class="mb-4">Top 1000 Spending Users</h2>
 
-  <table class="table table-hover" *ngIf="users.length">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Total Spent</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.totalSpent | currency }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Total Spent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>
+            <span class="fw-bold text-success">${{ user.totalSpent.toFixed(2) }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <div *ngIf="!users.length && !message">No user data available.</div>
+  <div *ngIf="users.length === 0" class="alert alert-warning mt-4 text-center">
+    No user data available.
+  </div>
 </div>
+
+

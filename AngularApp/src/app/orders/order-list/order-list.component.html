@@ -1,23 +1,33 @@
 <div class="container mt-4">
-  <h2>Order List</h2>
+  <h2 class="mb-4">Orders</h2>
   <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
 
-  <table class="table table-bordered table-striped" *ngIf="orders.length">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>User Id</th>
-        <th>Date Added</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders">
-        <td>{{ order.id }}</td>
-        <td>{{ order.userId }}</td>
-        <td>{{ order.dateAdded | date }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="d-flex justify-content-between mb-3">
+    <button class="btn btn-primary" [routerLink]="['/orders/add']">Add Order</button>
+  </div>
 
-  <div *ngIf="!orders.length && !message">No orders found.</div>
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Order ID</th>
+            <th>User Id</th>
+            <th>Date Added</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.userId }}</td>
+          <td>{{ order.dateAdded | date }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="alert alert-info text-center mt-4">No orders found.</div>
+  </ng-template>
 </div>
