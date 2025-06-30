@@ -3,6 +3,7 @@ using Domain.Context;
 using Infrastructure.Contracts;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Api
 {
@@ -22,7 +23,7 @@ namespace Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //register services
+            //Register services
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -51,6 +52,15 @@ namespace Api
                         .AllowAnyHeader()
                         .AllowAnyMethod());
             });
+
+            //Ensure that JSON serialization handles circular references
+            builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.WriteIndented = true;
+            });
+
 
 
             var app = builder.Build();
