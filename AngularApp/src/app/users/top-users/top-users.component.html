@@ -1,23 +1,36 @@
 <div class="container mt-4">
-  <h2 class="mb-4">Top 1000 Spending Users</h2>
+  <h2 class="mb-3">
+    🏆 Top 1000 Spending Users
+    <small class="text-muted d-block fs-6">Sorted by Total Spent (Descending)</small>
+  </h2>
 
   <div class="table-responsive">
-    <table class="table table-hover table-striped align-middle">
-      <thead class="table-primary">
+    <table class="table table-hover align-middle table-bordered shadow-sm">
+      <thead class="table-primary text-center">
         <tr>
           <th>#</th>
-          <th>User ID</th>
+          <th>User</th>
           <th>Name</th>
           <th>Total Spent</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ user.id }}</td>
+          <td class="text-center">
+            <span *ngIf="i === 0" class="text-warning fs-5">👑</span>
+            {{ i + 1 }}
+          </td>
+          <td class="text-center">
+            <div class="rounded-circle bg-light border d-inline-flex justify-content-center align-items-center"
+                 style="width: 40px; height: 40px;">
+              {{ user.name.charAt(0).toUpperCase() }}
+            </div>
+          </td>
           <td>{{ user.name }}</td>
-          <td>
-            <span class="fw-bold text-success">${{ user.totalSpent.toFixed(2) }}</span>
+          <td class="text-end">
+            <span class="fw-bold text-success">
+              {{ user.totalSpent | currency:'USD' }}
+            </span>
           </td>
         </tr>
       </tbody>
@@ -28,5 +41,3 @@
     No user data available.
   </div>
 </div>
-
-
