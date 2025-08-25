@@ -5,11 +5,13 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductReportComponent } from './product-report/product-report.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 const routes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'add', component: ProductFormComponent },
   { path: 'report', component: ProductReportComponent },
+  { path: 'edit/:id', component: ProductEditComponent }
 ];
 
 @NgModule({
@@ -17,6 +19,7 @@ const routes: Routes = [
     ProductListComponent,
     ProductFormComponent,
     ProductReportComponent,
+    ProductEditComponent
   ],
   imports: [CommonModule, FormsModule, RouterModule.forChild(routes)],
 })
