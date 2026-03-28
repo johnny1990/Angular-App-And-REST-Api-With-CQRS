@@ -31,9 +31,11 @@ namespace Tests
         {
             // Arrange  
             var product = new Domain.Entities.Product { Id = 1, Name = "Updated Product", Price = 15.0m };
+            _mockRepository.Setup(repo => repo.GetProductById(1))
+                .ReturnsAsync(product);
             _mockRepository.Setup(repo => repo.UpdateProduct(It.IsAny<Domain.Entities.Product>()))
                 .ReturnsAsync(product);
-            
+
             var command = new UpdateProductCommand { Id = 1, Name = "Updated Product", Price = 15.0m };
             var cancellationToken = CancellationToken.None;
             

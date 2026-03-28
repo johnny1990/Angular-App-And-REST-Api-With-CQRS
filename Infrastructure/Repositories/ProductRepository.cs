@@ -24,8 +24,7 @@ namespace Infrastructure.Repositories
             return products; 
         }
 
-
-        public async Task<Product> GetProductById(int id) =>
+        public async Task<Product?> GetProductById(int id) =>
             await _context.Products.FindAsync(id);
 
         public async Task<Product> CreateProduct(Product product)
